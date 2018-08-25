@@ -26,38 +26,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *******************************************************************************/
-package com.github.mob41.osumer.exceptions;
+package com.github.mob41.osumer.ui;
 
-import com.github.mob41.organdebug.exceptions.DebuggableException;
+import javax.swing.table.AbstractTableModel;
 
-public class NoBuildsForVersionException extends DebuggableException {
+import com.github.mob41.osumer.io.queue.Queue;
+import com.github.mob41.osumer.io.queue.QueueManager;
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 4508589028039107867L;
-    private static final String MSG = "No builds are defined in the version JSON.";
+public class QueueCellTableModel extends AbstractTableModel {
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op) {
-        super(json, last_op, this_op, next_op, MSG, false);
+    private QueueManager mgr;
+
+    public QueueCellTableModel(QueueManager mgr) {
+        this.mgr = mgr;
     }
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, String arg0) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0);
+    public Class getColumnClass(int columnIndex) {
+        return Queue.class;
     }
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, Throwable arg0) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0);
+    @Override
+    public String getColumnName(int columnIndex) {
+        return "Running queue(s)";
     }
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, String arg0,
-            Throwable arg1) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0, arg1);
+    @Override
+    public int getColumnCount() {
+        return 1;
     }
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, String arg0,
-            Throwable arg1, boolean arg2, boolean arg3) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0, arg1, arg2, arg3);
+    @Override
+    public int getRowCount() {
+        if (mgr == null || mgr.getList() == null) {
+            return 0;
+        }
+        return mgr.getList().size();
+    }
+
+    @Override
+    public Object getValueAt(int arg0, int arg1) {
+        if (mgr == null || mgr.getList() == null) {
+            return null;
+        }
+        return mgr.getList().get(arg0);
     }
 
 }

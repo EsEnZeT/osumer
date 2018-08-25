@@ -30,6 +30,8 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class TextPanel extends JPanel {
 
@@ -46,24 +48,31 @@ public class TextPanel extends JPanel {
 		JLabel lblUpdateChangelog = new JLabel("Update description/change-log:");
 		
 		JScrollPane scrollPane = new JScrollPane();
+		
+		JLabel lblDoYouWant = new JLabel("Do you want to install this update?");
+		lblDoYouWant.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblDoYouWant.setHorizontalAlignment(SwingConstants.CENTER);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(scrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
-						.addComponent(lblUpdateChangelog, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE))
-					.addContainerGap())
+		    groupLayout.createParallelGroup(Alignment.TRAILING)
+		        .addGroup(groupLayout.createSequentialGroup()
+		            .addContainerGap()
+		            .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+		                .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+		                .addComponent(lblUpdateChangelog, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+		                .addComponent(lblDoYouWant, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE))
+		            .addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblUpdateChangelog)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-					.addContainerGap())
+		    groupLayout.createParallelGroup(Alignment.LEADING)
+		        .addGroup(groupLayout.createSequentialGroup()
+		            .addContainerGap()
+		            .addComponent(lblUpdateChangelog)
+		            .addPreferredGap(ComponentPlacement.RELATED)
+		            .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+		            .addPreferredGap(ComponentPlacement.RELATED)
+		            .addComponent(lblDoYouWant)
+		            .addContainerGap())
 		);
 		
 		JTextArea textArea = new JTextArea();

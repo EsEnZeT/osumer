@@ -26,38 +26,67 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *******************************************************************************/
-package com.github.mob41.osumer.exceptions;
+package com.github.mob41.osumer;
 
-import com.github.mob41.organdebug.exceptions.DebuggableException;
+import java.io.File;
+import java.io.IOException;
 
-public class NoBuildsForVersionException extends DebuggableException {
+public class Osumer {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 4508589028039107867L;
-    private static final String MSG = "No builds are defined in the version JSON.";
+    // TODO: Hard-code version?
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op) {
-        super(json, last_op, this_op, next_op, MSG, false);
+    public static final String OSUMER_VERSION = "2.0.0";
+
+    public static final String OSUMER_BRANCH = "snapshot";
+
+    public static final int OSUMER_BUILD_NUM = 5;
+
+    private Osumer() {
+    
     }
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, String arg0) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0);
+    public static boolean isWindows() {
+        return System.getProperty("os.name").contains("Windows");
     }
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, Throwable arg0) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0);
+    public static boolean isWindowsElevated() {
+        if (!isWindows()) {
+            return false;
+        }
+
+        final String programfiles = System.getenv("PROGRAMFILES");
+
+        if (programfiles == null || programfiles.length() < 1) {
+            throw new IllegalStateException("OS mismatch. Program Files directory not detected");
+        }
+
+        File testPriv = new File(programfiles);
+        if (!testPriv.canWrite()) {
+            return false;
+        }
+        File fileTest = null;
+
+        try {
+            fileTest = File.createTempFile("testsu", ".dll", testPriv);
+        } catch (IOException e) {
+            return false;
+        } finally {
+            if (fileTest != null) {
+                fileTest.delete();
+            }
+        }
+        return true;
     }
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, String arg0,
-            Throwable arg1) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0, arg1);
-    }
-
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, String arg0,
-            Throwable arg1, boolean arg2, boolean arg3) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0, arg1, arg2, arg3);
+    public static int updateSourceStrToInt(String branchStr) {
+        if (branchStr.equals("snapshot")) {
+            return 2;
+        } else if (branchStr.equals("beta")) {
+            return 1;
+        } else if (branchStr.equals("stable")) {
+            return 0;
+        }
+        return -1;
     }
 
 }

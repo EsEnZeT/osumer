@@ -1,14 +1,24 @@
-# ![osumerIcon64px](http://mob41.github.io/images/osumer/osumerIcon_64px.png) osumer [![Download osumer](http://img.shields.io/github/downloads/mob41/osumer/latest/total.svg)](https://github.com/mob41/osumer/releases/latest) [![Download osumer](http://img.shields.io/github/downloads/mob41/osumer/total.svg)](https://github.com/mob41/osumer/releases/latest)
-Osu! beatmap download helper
+# ![osumerIcon64px](http://mob41.github.io/images/osumer/osumerIcon_64px.png) osumer2 [![Download osumer](http://img.shields.io/github/downloads/mob41/osumer/latest/total.svg)](https://github.com/mob41/osumer/releases/latest) [![Download osumer](http://img.shields.io/github/downloads/mob41/osumer/total.svg)](https://github.com/mob41/osumer/releases/latest)
+The easiest,express osu! beatmap downloader helper!
 
 >[Please donate to osu!. It is a great game, right?](https://osu.ppy.sh/p/support)
 
 Put a star if you like this software! I would be happy to continue developing this software!
 
+## :warning: Legacy Old-site Parsing
+
+Any v2 builds older than ```2.0.0-snapshot-b4``` will not work because of the deprecating of osu!-web old-site. All end users must update to ```2.0.0-snapshot-b4``` to temporarily fix the problem.
+
+## v2 has released
+
+Experimental Builds of osumer v2 has been released at https://github.com/mob41/osumer/releases/latest . And to all osumer clients with updater functionality. Please do not hesitate trying it with new features!
+
+Tutorials (still building) can be found at https://github.com/mob41/osumer/wiki/osumer-tutorial .
+
 ## Disclaimer
 This software does not contain malicious code that will send username and password to another server other than osu!'s login server. You can feel free to look through the code. If you still feel uncomfortable with this software, you can simply stop using it. Thank you!
 
-The application only sends the ```username``` and ```password``` parameters to ```https://osu.ppy.sh/forum/ucp.php?mode=login``` in [Osu.java](https://github.com/mob41/osumer/blob/master/src/main/java/com/github/mob41/osumer/io/Osu.java) for logging in to osu! forum. And saves the username and password specified in the user interface to local configuration in [Config.java](https://github.com/mob41/osumer/blob/master/src/main/java/com/github/mob41/osumer/Config.java). Unless the data are sniffed by a hacker or your friends want to play tricks on you, the data is not sent to anywhere other than osu! login server. (alright also sent to, proxies, firewalls, routers, switches, DNS servers, etc.)
+The application only sends the ```username``` and ```password``` parameters to ```https://osu.ppy.sh/forum/ucp.php?mode=login``` in [Osu.java](https://github.com/mob41/osums-api/blob/master/src/main/java/com/github/mob41/osums/io/beatmap/Osums.java) for logging in to osu! forum. And saves the username and password specified in the user interface to local configuration in [Config.java](https://github.com/mob41/osumer/blob/master/src/main/java/com/github/mob41/osumer/Config.java). Unless the data are sniffed by a hacker or your friends want to play tricks on you, the data is not sent to anywhere other than osu! login server. (alright also sent to, proxies, firewalls, routers, switches, DNS servers, etc.)
 
 By using this software, I take no responsibility here. Use in your own risk.
 
@@ -21,6 +31,19 @@ By using this software, I take no responsibility here. Use in your own risk.
 - It will start beatmaps download automatically when an arugment of the beatmap URL is passed to the application.
 
 - In the user interface, users can download beatmaps manually by pasting a beatmap URL, and press the ```Download & Import``` button.
+
+- Background downloading
+- Pre-started daemon for more, and more faster osumerExpress experience
+- Improved, and more application preferences!
+- In-app down-grade software unlocked
+- Multi-downloading for default 4 threads, at with no modification max 8 threads!
+- Before,Started,After download tones!
+- Estimated Time Arrival (ETA) and elapsed time
+- Listed downloading
+- Allows download queuing
+- Beatmap searching
+- <b>osums</b> beatmap searching
+- <b>osums</b> beatmap management (i.e. exporting, categorizing)
 
 ## Screenshots
 

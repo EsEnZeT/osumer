@@ -26,38 +26,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *******************************************************************************/
-package com.github.mob41.osumer.exceptions;
+package com.github.mob41.osumer.ui;
 
-import com.github.mob41.organdebug.exceptions.DebuggableException;
+import java.awt.Component;
 
-public class NoBuildsForVersionException extends DebuggableException {
+import javax.swing.JTable;
+import javax.swing.table.TableCellRenderer;
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 4508589028039107867L;
-    private static final String MSG = "No builds are defined in the version JSON.";
+import com.github.mob41.osumer.io.queue.Queue;
+import com.github.mob41.osums.io.beatmap.ResultBeatmap;
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op) {
-        super(json, last_op, this_op, next_op, MSG, false);
+public class ResultBeatmapCellRenderer implements TableCellRenderer {
+
+    private ResultBeatmapCell comp;
+
+    public ResultBeatmapCellRenderer() {
+        comp = new ResultBeatmapCell();
     }
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, String arg0) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0);
-    }
-
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, Throwable arg0) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0);
-    }
-
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, String arg0,
-            Throwable arg1) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0, arg1);
-    }
-
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, String arg0,
-            Throwable arg1, boolean arg2, boolean arg3) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0, arg1, arg2, arg3);
+    @Override
+    public Component getTableCellRendererComponent(JTable arg0, Object arg1, boolean arg2, boolean arg3, int arg4, int arg5) {
+        comp.updateData((ResultBeatmap) arg1);
+        if (arg2) {
+            comp.setBackground(arg0.getSelectionBackground());
+        } else {
+            comp.setBackground(arg0.getBackground());
+        }
+        return comp;
     }
 
 }

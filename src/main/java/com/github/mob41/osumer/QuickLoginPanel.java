@@ -26,7 +26,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *******************************************************************************/
-package com.github.mob41.osumer.ui;
+package com.github.mob41.osumer;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
@@ -39,7 +39,7 @@ import javax.swing.JPasswordField;
 import java.awt.Color;
 import java.awt.Font;
 
-public class LoginPanel extends JPanel {
+public class QuickLoginPanel extends JPanel {
     /**
      * 
      */
@@ -50,7 +50,7 @@ public class LoginPanel extends JPanel {
     /**
      * Create the panel.
      */
-    public LoginPanel() {
+    public QuickLoginPanel() {
 
         JLabel lblNoConfigurationFound = new JLabel("No configuration found for logging in.");
         lblNoConfigurationFound.setFont(new Font("PMingLiU", Font.BOLD, 12));

@@ -26,38 +26,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *******************************************************************************/
-package com.github.mob41.osumer.exceptions;
+package com.github.mob41.osumer.ui;
 
-import com.github.mob41.organdebug.exceptions.DebuggableException;
+import java.awt.Component;
 
-public class NoBuildsForVersionException extends DebuggableException {
+import javax.swing.AbstractCellEditor;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 4508589028039107867L;
-    private static final String MSG = "No builds are defined in the version JSON.";
+import com.github.mob41.osumer.io.queue.Queue;
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op) {
-        super(json, last_op, this_op, next_op, MSG, false);
+public class QueueCellEditor extends AbstractCellEditor implements TableCellEditor {
+
+    private QueueCell comp;
+
+    public QueueCellEditor(QueueCellTableModel model) {
+        comp = new QueueCell(model);
     }
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, String arg0) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0);
+    @Override
+    public Object getCellEditorValue() {
+        return null;
     }
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, Throwable arg0) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0);
-    }
-
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, String arg0,
-            Throwable arg1) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0, arg1);
-    }
-
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, String arg0,
-            Throwable arg1, boolean arg2, boolean arg3) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0, arg1, arg2, arg3);
+    @Override
+    public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+        comp.updateData((Queue) value);
+        if (isSelected) {
+            comp.setBackground(table.getSelectionBackground());
+        } else {
+            comp.setBackground(table.getBackground());
+        }
+        return comp;
     }
 
 }

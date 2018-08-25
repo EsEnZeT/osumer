@@ -26,38 +26,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *******************************************************************************/
-package com.github.mob41.osumer.exceptions;
+package com.github.mob41.osumer.ui;
 
-import com.github.mob41.organdebug.exceptions.DebuggableException;
+import java.awt.Component;
 
-public class NoBuildsForVersionException extends DebuggableException {
+import javax.swing.JTable;
+import javax.swing.table.TableCellRenderer;
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 4508589028039107867L;
-    private static final String MSG = "No builds are defined in the version JSON.";
+import com.github.mob41.osumer.io.queue.Queue;
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op) {
-        super(json, last_op, this_op, next_op, MSG, false);
+public class QueueCellRenderer implements TableCellRenderer {
+
+    private QueueCell comp;
+
+    public QueueCellRenderer(QueueCellTableModel model) {
+        comp = new QueueCell(model);
     }
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, String arg0) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0);
-    }
+    @Override
+    public Component getTableCellRendererComponent(JTable arg0, Object arg1, boolean arg2, boolean arg3, int arg4,
+            int arg5) {
+        comp.updateData((Queue) arg1);
+        if (arg2) {
+            comp.setBackground(arg0.getSelectionBackground());
+        } else {
+            comp.setBackground(arg0.getBackground());
+        }
+        return comp;
 
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, Throwable arg0) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0);
-    }
-
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, String arg0,
-            Throwable arg1) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0, arg1);
-    }
-
-    public NoBuildsForVersionException(String json, String last_op, String this_op, String next_op, String arg0,
-            Throwable arg1, boolean arg2, boolean arg3) {
-        super(json, last_op, this_op, next_op, MSG, false, arg0, arg1, arg2, arg3);
     }
 
 }
